@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=BBH+Bartle&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    color: white;
+    font-family: "Outfit", sans-serif;
+}
+svg{
+    fill: white;
+}
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(assets/bg-image.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.container{
+    width: min(80%,600px);
+    border: 1px solid rgba(251, 248, 248, 0.441);
+    border-radius: 10px;
+    padding: 10px;
+}
+.weather-card{
+    width: 100%;
+    background:linear-gradient(to top, rgb(3, 3, 250),rgb(68, 165, 244));
+    padding: 10px;
+    border-radius: 10px;
+    backdrop-filter: blur(30px);
+}
+.top-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    width: 100%;
+    padding: 20px;
+}
+.top-content input::placeholder{
+    color: white;
+    opacity: 0.75;
+    letter-spacing: 0.5px;
+}
+input:placeholder-shown,.top-content input{
+    border: none;
+    width: 100%;
+    min-width: 100px;
+    border-radius: 30px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    outline: none;
+    background-color: rgb(0, 123, 255);
+    caret-color: rgb(242, 255, 0);
+    color: white;
+}
+#Search{
+    background-color: red;
+    height: 40px;
+    width:40px;
+    padding: 0 10px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius:10px;
+}
+#Search:hover {
+    background-color: #cc0000;
+    transform: scale(1.05);
+    transition: all 0.2s ease;
+}
+
+.weather-update {
+    text-align: center;
+    margin-bottom: 30px;
+    display: none;
+}
+
+.day-date {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+#temperature{
+    padding: 0px 8px;
+    font-size: 5rem;
+    font-weight: 700;
+    margin-bottom: 0px;
+}
+.temperature-reading svg{
+    width: 35px;
+    height: 35px;
+}
+#unit{
+    font-size: 2rem;
+    font-weight: 500;
+}
+.weather-today{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-family: "Outfit","san-serif";
+}
+.City-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.City-name svg{
+    fill: rgb(221, 255, 0);
+}
+#city{
+    padding-left: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.bottom-content{
+    display: none;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    
+}
+.humidity, .wind-speed, .visibility {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+#title{
+    width: 100px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-shrink: 0;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+#humid, #wind ,#visible{
+    font-size: 2.1rem;
+    font-weight: 700;
+    padding: 0;
+}
+#percentage, #wind-speed, #visibility-unit {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.7;
+    margin-bottom: 0px;
+}
+.error-message {
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 20px 10px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 500;
+    animation: slideDown 0.4s ease;
+    display: none;
+}
+.error-message img{
+    margin-top: 20px;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+       transform: translateY(0);
+    }
+
+}
