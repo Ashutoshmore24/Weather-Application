@@ -195,3 +195,36 @@ input:placeholder-shown,.top-content input{
     }
 
 }
+
+@media (max-width: 480px) {
+
+    .top-content {
+        flex-direction: row;
+        padding: 15px 10px;
+    }
+
+    #temperature {
+        font-size: 3.5rem;
+    }
+
+    #unit {
+        font-size: 1.5rem;
+    }
+
+    .bottom-content {
+        gap: 1rem;
+    }
+
+    .humidity,
+    .wind-speed,
+    .visibility {
+        width: 100px;
+        height: 100px;
+    }
+
+    #humid,
+    #wind,
+    #visible {
+        font-size: 1.6rem;
+    }
+}
