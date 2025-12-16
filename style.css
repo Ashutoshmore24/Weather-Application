@@ -22,6 +22,9 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
 }
+body::-webkit-scrollbar{
+    display: none;
+}
 .container{
     width: min(80%,600px);
     border: 1px solid rgba(251, 248, 248, 0.441);
@@ -45,13 +48,14 @@ body{
     padding: 20px;
 }
 .top-content input::placeholder{
+    width: max(10fr,80%);
     color: white;
     opacity: 0.75;
     letter-spacing: 0.5px;
 }
 input:placeholder-shown,.top-content input{
     border: none;
-    width: 100%;
+    width:70%;
     min-width: 100px;
     border-radius: 30px;
     padding: 12px 20px;
@@ -83,6 +87,7 @@ input:placeholder-shown,.top-content input{
     text-align: center;
     margin-bottom: 30px;
     display: none;
+    animation: scaleup 0.8s ease;
 }
 
 .day-date {
@@ -126,18 +131,62 @@ input:placeholder-shown,.top-content input{
     font-size: 1rem;
     font-weight: 500;
 }
+.aqi_wrapper{
+    width: 100%;
+}
+.aqi-container{
+    border: 1px solid white;
+    border-top: none;
+    background:linear-gradient(to top,rgb(229, 246, 119),rgb(2, 132, 231));
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: scaleup 1s ease-in-out;
+}
+.content{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.particle{
+    color: black;
+    border: 1px solid rgba(255, 255, 255, 0.2);;
+    display: flex;
+    height: 200px;
+    width: 1fr;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.23);
+}
+
 .bottom-content{
+    width: 100%;
     display: none;
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
+    margin-bottom: 20px;
+    animation: scaleup 0.8s ease;
     
 }
 .humidity, .wind-speed, .visibility, .pressure {
-    width: 120px;
+    width: 1fr;
     height: 120px;
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -148,7 +197,7 @@ input:placeholder-shown,.top-content input{
     transition: all 0.3s ease;
     text-align: center;
 }
-#title{
+#title,#description{
     width: 100px;
     text-align: center;
     display: flex;
@@ -158,17 +207,40 @@ input:placeholder-shown,.top-content input{
     font-size: 1rem;
     margin-bottom: 1rem;
 }
-#humid, #wind ,#visible , #pressureVal{
+#pm2_5,#pm10,#ozone,#nitrogen,#humid, #wind ,#visible , #pressureVal{
     font-size: 2.1rem;
     font-weight: 700;
     padding: 0;
 }
-#percentage, #wind-speed, #visibility-unit, #pressure-unit {
+#percentage, #wind-speed, #visibility-unit, #pressure-unit, #unit {
     margin-top: 5px;
     font-size: 0.9rem;
     font-weight: 500;
     opacity: 0.7;
     margin-bottom: 0px;
+}
+.dropdown{
+    width: 100%;
+    background-color: white;
+    height: 20px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+}
+#drop svg{
+    fill: black;
+    width: 100px;
+    height: 20px;
+    display: flex;
+    transform: scale(1.7);
+    background: transparent;
+    cursor: pointer;
+}
+.dropdown #drop{
+    border: none;
+    background-color:transparent;
+    align-content: center;
 }
 .error-message {
     backdrop-filter: blur(10px);
@@ -184,6 +256,16 @@ input:placeholder-shown,.top-content input{
     margin-top: 20px;
 }
 
+@keyframes scaleup{
+    0%{
+        opacity: 0;
+        transform: scale(0);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
 @keyframes slideDown {
     from {
         opacity: 0;
@@ -197,6 +279,13 @@ input:placeholder-shown,.top-content input{
 }
 
 @media (max-width: 480px) {
+    .container {
+        width: 92%;
+    }
+
+    .particle {
+        min-width: 140px;
+    }
 
     .top-content {
         flex-direction: row;
@@ -219,14 +308,88 @@ input:placeholder-shown,.top-content input{
     .wind-speed,
     .visibility,
     .pressure {
-        width: 100px;
+        width: min(1fr, 80px);
         height: 100px;
     }
 
     #humid,
     #wind,
     #visible,
-    #pressureVal{
+    #pressureVal,
+    #pm2_5,#pm10,#ozone,#nitrogen{
         font-size: 1.6rem;
+    }
+    .aqi-container{
+        padding: 20px;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .container {
+        width: 95%;
+    }
+
+    .top-content {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .top-content input {
+        font-size: 0.9rem;
+        padding: 10px 16px;
+    }
+
+    #temperature {
+        font-size: 3rem;
+    }
+
+    #unit {
+        font-size: 1.3rem;
+    }
+
+    .humidity,
+    .wind-speed,
+    .visibility,
+    .pressure {
+        height: 95px;
+        flex: 1 1 100%;
+    }
+
+    #humid,
+    #wind,
+    #visible,
+    #pressureVal {
+        font-size: 1.2rem;
+    }
+    #title{
+        font-size: 15px;
+    }
+}
+
+@media (max-height: 500px) {
+
+    body {
+        align-items: flex-start;
+        padding: 20px 0;
+    }
+
+    .weather-card {
+        margin-bottom: 20px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+
+    .container {
+        width: 85%;
+    }
+
+    #temperature {
+        font-size: 4rem;
+    }
+
+    .particle {
+        min-width: 160px;
     }
 }
