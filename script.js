@@ -12,6 +12,7 @@ const feelValue = document.getElementById("feelValue");
 const humidity = document.getElementById("humid");
 const windSpeed = document.getElementById("wind");
 const visibility = document.getElementById("visible");
+const pressure = document.getElementById("pressureVal");
 const errorMsg = document.getElementById("error");
 
 function updateDate() {
@@ -68,7 +69,7 @@ async function checkWeather(city) {
         humidity.textContent = data.main.humidity;
         windSpeed.textContent = (data.wind.speed * 3.6).toFixed(1); 
         visibility.textContent = (data.visibility / 1000).toFixed(1);
-    
+        pressure.textContent = data.main.pressure;
 };
 
 

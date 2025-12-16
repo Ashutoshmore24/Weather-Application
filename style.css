@@ -131,10 +131,10 @@ input:placeholder-shown,.top-content input{
     justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 1rem;
     
 }
-.humidity, .wind-speed, .visibility {
+.humidity, .wind-speed, .visibility, .pressure {
     width: 120px;
     height: 120px;
     display: flex;
@@ -158,12 +158,12 @@ input:placeholder-shown,.top-content input{
     font-size: 1rem;
     margin-bottom: 1rem;
 }
-#humid, #wind ,#visible{
+#humid, #wind ,#visible , #pressureVal{
     font-size: 2.1rem;
     font-weight: 700;
     padding: 0;
 }
-#percentage, #wind-speed, #visibility-unit {
+#percentage, #wind-speed, #visibility-unit, #pressure-unit {
     margin-top: 5px;
     font-size: 0.9rem;
     font-weight: 500;
@@ -217,14 +217,16 @@ input:placeholder-shown,.top-content input{
 
     .humidity,
     .wind-speed,
-    .visibility {
+    .visibility,
+    .pressure {
         width: 100px;
         height: 100px;
     }
 
     #humid,
     #wind,
-    #visible {
+    #visible,
+    #pressureVal{
         font-size: 1.6rem;
     }
 }
