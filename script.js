@@ -22,6 +22,14 @@ const pm2 = document.getElementById("pm2_5");
 const pm10 = document.getElementById("pm10");
 const ozone = document.getElementById("ozone");
 const nitrogen = document.getElementById("nitrogen");
+const indicatorpm25 = document.getElementById("indicator-pm25");
+const indicatorpm10 = document.getElementById("indicator-pm10");
+const indicatoro3 = document.getElementById("indicator-o3");
+const indicatorno2 = document.getElementById("indicator-no2");
+const pm25Box = indicatorpm25.parentElement;
+const pm10Box = indicatorpm10.parentElement;
+const o3Box = indicatoro3.parentElement;
+const no2Box = indicatorno2.parentElement;
 
 const errorMsg = document.getElementById("error");
 
@@ -88,11 +96,99 @@ async function checkWeather(city) {
 
         if (aqi_data.list?.length) {
             const c = aqi_data.list[0].components;
-            pm2.textContent = c.pm2_5.toFixed(1);
-            pm10.textContent = c.pm10.toFixed(1);
-            ozone.textContent = c.o3.toFixed(1);
-            nitrogen.textContent = c.no2.toFixed(1);
+        
+            const pm25 = Number(c.pm2_5.toFixed(1));
+            const pm10Value = Number(c.pm10.toFixed(1));
+            const o3 = Number(c.o3.toFixed(1));
+            const no2 = Number(c.no2.toFixed(1));
+
+            indicatorpm25.style.backgroundColor = "transparent";
+            indicatorpm10.style.backgroundColor = "transparent";
+            indicatoro3.style.backgroundColor = "transparent";
+            indicatorno2.style.backgroundColor = "transparent";
+
+        
+            // PM2.5
+            pm2.textContent = pm25;
+            if (pm25 <= 12) {
+                indicatorpm25.style.backgroundColor = "rgb(2, 214, 2)";
+                pm25Box.dataset.label = "Very Good";
+                pm25Box.style.setProperty("--aqi-color", "rgb(2,214,2)");
+            } else if (pm25 <= 35.4) {
+                indicatorpm25.style.backgroundColor = "yellow";
+                pm25Box.dataset.label = "Moderate";
+                pm25Box.style.setProperty("--aqi-color", "yellow");
+            } else if (pm25 <= 55.4) {
+                indicatorpm25.style.backgroundColor = "rgb(255, 140, 0)";
+                pm25Box.dataset.label = "Poor";
+                pm25Box.style.setProperty("--aqi-color", "rgb(255,140,0)");
+            } else {
+                indicatorpm25.style.backgroundColor = "red";
+                pm25Box.dataset.label = "Very Poor";
+                pm25Box.style.setProperty("--aqi-color", "red");
+            }
+        
+            // PM10
+            pm10.textContent = pm10Value;
+            if (pm10Value <= 50) {
+                indicatorpm10.style.backgroundColor = "rgb(2, 214, 2)";
+                pm10Box.dataset.label = "Very Good";
+                pm10Box.style.setProperty("--aqi-color", "rgb(2, 214, 2)");
+            } else if (pm10Value <= 100) {
+                indicatorpm10.style.backgroundColor = "yellow";
+                pm10Box.dataset.label = "Moderate";
+                pm10Box.style.setProperty("--aqi-color", "yellow");
+            } else if (pm10Value <= 250) {
+                indicatorpm10.style.backgroundColor = "rgb(255, 140, 0)";
+                pm10Box.dataset.label = "Poor";
+                pm10Box.style.setProperty("--aqi-color", "rgb(255, 140, 0)");
+            } else {
+                indicatorpm10.style.backgroundColor = "red";
+                pm10Box.dataset.label = "Very Poor";
+                pm10Box.style.setProperty("--aqi-color", "red");
+            }
+        
+            // Ozone
+            ozone.textContent = o3;
+            if (o3 <= 100) {
+                indicatoro3.style.backgroundColor = "rgb(2, 214, 2)";
+                o3Box.dataset.label = "Very Good";
+                o3Box.style.setProperty("--aqi-color", "rgb(2,214,2)");
+            } else if (o3 <= 160) {
+                indicatoro3.style.backgroundColor = "yellow";
+                o3Box.dataset.label = "Moderate";
+                o3Box.style.setProperty("--aqi-color", "yellow");
+            } else if (o3 <= 200) {
+                indicatoro3.style.backgroundColor = "rgb(255, 140, 0)";
+                o3Box.dataset.label = "Poor";
+                o3Box.style.setProperty("--aqi-color", "rgb(255,140,0)");
+            } else {
+                indicatoro3.style.backgroundColor = "red";
+                o3Box.dataset.label = "Very Poor";
+                o3Box.style.setProperty("--aqi-color", "red");
+            }
+        
+            // NO2
+            nitrogen.textContent = no2;
+            if (no2 <= 40) {
+                indicatorno2.style.backgroundColor = "rgb(2, 214, 2)";
+                no2Box.dataset.label = "Very Good";
+                no2Box.style.setProperty("--aqi-color", "rgb(2,214,2)");
+            } else if (no2 <= 80) {
+                indicatorno2.style.backgroundColor = "yellow";
+                no2Box.dataset.label = "Moderate";
+                no2Box.style.setProperty("--aqi-color", "yellow");
+            } else if (no2 <= 180) {
+                indicatorno2.style.backgroundColor = "rgb(255, 140, 0)";
+                no2Box.dataset.label = "Poor";
+                no2Box.style.setProperty("--aqi-color", "rgb(255,140,0)");
+            } else {
+                indicatorno2.style.backgroundColor = "red";
+                no2Box.dataset.label = "Very Poor";
+                no2Box.style.setProperty("--aqi-color", "red");
+            }
         }
+        
 
         errorMsg.style.display = "none";
         weatherDiv.style.display = "block";
@@ -113,20 +209,22 @@ async function checkWeather(city) {
 
 
 searchBtn.addEventListener("click", () => {
-    const cityInput = inputBox.value.trim();
+    const cityInput = inputBox.value;
     if (!cityInput) {
         alert("PLease Fill the Input Field First !");
+        return;
     }
     console.log("Checking Weather...");
     checkWeather(inputBox.value);
 });
 inputBox.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
-        const cityInput = inputBox.value.trim();
+        const cityInput = inputBox.value;
         if (cityInput) {
             checkWeather(cityInput);
         } else {
             alert("PLease Fill the Input Field First !");
+            return;
         }
     }
 });

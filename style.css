@@ -196,7 +196,7 @@ input:placeholder-shown,.top-content input{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    animation: scaleup 1s ease-in-out;
+    animation: slidedown 1s ease-in-out;
 }
 .content{
     width: 100%;
@@ -205,6 +205,40 @@ input:placeholder-shown,.top-content input{
     align-items: center;
     gap: 20px;
     flex-wrap: wrap;
+}
+.box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box::after {
+    content: attr(data-label);
+    position: absolute;
+    width: max-content;
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-align: center;
+    background-color: var(--aqi-color, black);
+    color: black;
+    bottom: -80%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.box:hover::after {
+    opacity: 1;
+}
+#indicator-pm25,#indicator-pm10,#indicator-o3,#indicator-no2{
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+    background-color: red;
+    border-radius: 50%;
 }
 .particle{
     color: black;
@@ -305,17 +339,6 @@ input:placeholder-shown,.top-content input{
 }
 .error-message img{
     margin-top: 20px;
-}
-
-@keyframes scaleup{
-    0%{
-        opacity: 0;
-        transform: scale(0);
-    }
-    100%{
-        opacity: 1;
-        transform: scale(1);
-    }
 }
 @keyframes slideDown {
     from {
